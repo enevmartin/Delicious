@@ -1,0 +1,13 @@
+<!-- recipes/recipe_form.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2>{% if request.resolver_match.url_name == 'recipe_create' %}Create New Recipe{% else %}Update Recipe{% endif %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{% if request.resolver_match.url_name == 'recipe_create' %}Create{% else %}Update{% endif %}</button>
+        </form>
+    </div>
+{% endblock %}
