@@ -1,13 +1,13 @@
 # accounts/views.py
 from django.contrib.auth import logout, login
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import CreateView, DetailView, UpdateView
 
-from Delicious.accounts.forms import CustomUserCreationForm
+from Delicious.accounts.forms import CustomUserCreationForm, ProfileForm
+from Delicious.accounts.models import CustomUser, Profile
 
 
 class SignUpView(CreateView):
@@ -26,9 +26,24 @@ class SignUpView(CreateView):
     #     return super().form_valid(form)
 
 
-class ProfileView(LoginRequiredMixin, TemplateView):
+class ProfileView(DetailView):
+    model = CustomUser  # or your CustomUser model
     template_name = 'accounts/my_profile.html'
+    context_object_name = 'user_profile'
 
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk')
+        return self.model.objects.get(pk=pk)
+
+
+class ProfileUpdateView(UpdateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = 'accounts/edit_profile.html'
+    queryset = Profile.objects.all()
+
+    def get_success_url(self):
+        return reverse_lazy('my_profile', kwargs={'pk': self.object.user.pk})
 
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'

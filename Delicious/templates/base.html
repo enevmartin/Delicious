@@ -92,11 +92,11 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="active"><a href="{% url 'index' %}">Home</a></li>
+                                    <li> <a href="{% url 'index' %}">Home</a></li>
                                     <li><a href="{% url 'recipe-post' %}">Categories</a></li>
                                     {% if request.user.is_authenticated %}
-                                    <li><a href="{% url 'my_profile' %}">My Profile</a></li>
-                                    <li><a href="#">My Recipes</a></li>
+                                    <li><a href="{% url 'my_profile' pk=request.user.pk %}">My Profile</a></li>
+                                    <li><a href="{% url 'recipe-post' %}">My Recipes</a></li>
                                     <li><a href="{% url 'logout' %}">Logout</a></li>
                                     {% else %}
                                     <li><a href="{% url 'login' %}">Login</a></li>

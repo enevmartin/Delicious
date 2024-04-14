@@ -1,9 +1,19 @@
-<!-- accounts/profile.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-        <h2>Profile</h2>
-        <!-- Display user profile information here -->
+<div class="container">
+    <h2 style="text-align: center;">My Profile</h2>
+    <div class="profile-info" style="text-align: center;">
+        <p><strong>First Name:</strong> {{ request.user.profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ request.user.profile.last_name }}</p>
+        <p><strong>Date of Birth:</strong> {{ request.user.profile.date_of_birth }}</p>
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>Profile Picture:</strong> <img src="{{ request.user.profile.profile_picture }}"  alt=" "></p>
     </div>
+
+    <!-- Add a link to edit profile -->
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'edit_profile' pk=request.user.pk %}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">Edit Profile</a>
+    </div>
+</div>
 {% endblock %}
