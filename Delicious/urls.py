@@ -14,12 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
 from django.contrib import admin
 from django.urls import path, include
 
+from Delicious.common import views
 from Delicious.common.views import IndexView
 
 urlpatterns = [
@@ -28,7 +31,10 @@ urlpatterns = [
     path('common/', include('Delicious.common.urls')),
     path('recipes/', include('Delicious.recipes.urls')),
     path('accounts/', include('Delicious.accounts.urls')),
-    # Add other app URLs here if needed
+    # Custom error views
+    path('404/', views.custom_404_view),
+    path('500/', views.custom_500_view),
 ]
 
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

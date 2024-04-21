@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from Delicious.accounts.forms import CustomUserCreationForm, ProfileForm
 from Delicious.accounts.models import CustomUser, Profile
@@ -45,6 +45,15 @@ class ProfileUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('my_profile', kwargs={'pk': self.object.user.pk})
 
+
+class ProfileDeleteView(DeleteView):
+    model = CustomUser
+    success_url = reverse_lazy('index')  # Redirect to the home page after deletion
+    template_name = 'accounts/profile_confirm_delete.html'  # Create this template
+
+    def get_object(self, queryset=None):
+        return self.request.user  # Delete the logged-in user's profile
+
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
     form_class = AuthenticationForm
@@ -55,3 +64,4 @@ def custom_logout(request):
     logout(request)
 
     return redirect('index')
+

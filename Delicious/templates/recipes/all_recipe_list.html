@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(../../../static/img/bg-img/breadcumb2.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-text text-center">
+                        <h2>All Recipes</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <div class="receipe-post-area section-padding-80">
+
+        <!-- Receipe Post Search -->
+        <div class="receipe-post-search mb-80">
+            <div class="container">
+                <form action="{% url 'search_recipes' %}" method="get"> <!-- Update the action attribute -->
+                    <input type="hidden" name="context" value="all">
+
+                    <div class="row justify-content-end">
+                        <div class="col-12 col-lg-6">
+                            <div class="row">
+{#                                <div class="col-12 col-lg-6">#}
+{#                                    <select name="category" id="select1"> <!-- Update the select name -->#}
+{#                                        <option value="">Recipe Categories</option>#}
+{#                                        <option value="Breakfast">Breakfast</option>#}
+{#                                        <option value="Lunch">Lunch</option>#}
+{#                                        <option value="Dinner">Dinner</option>#}
+{#                                        <option value="Appetizers">Appetizers</option>#}
+{#                                    </select>#}
+{#                                </div>#}
+                                <div class="col-12 col-lg-6">
+                                    <input type="search" name="search" placeholder="Search Recipes">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 text-right">
+                            <button type="submit" class="btn btn-primary btn-lg">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Receipe Slider -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="receipe-slider owl-carousel">
+                        {% for recipe in recipes %}
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="{{ recipe.picture.url }}" class="card-img-top img-fluid" alt="{{ recipe.title }}">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title">{{ recipe.title }}</h5>
+                                        <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-info">Details</a>
+                                    </div>
+                                    <!--
+                                    <p class="card-text">Preparation Time: {{ recipe.preparation_time }}</p>
+                                    <p class="card-text">Ingredients: {{ recipe.ingredients }}</p>
+                                    <p class="card-text">Instructions: {{ recipe.instructions }}</p>
+                                    <p class="card-text">Creator: {{ recipe.creator }}</p>
+                                    <p class="card-text">Category: {{ recipe.category }}</p>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{#        <div class="row align-items-center mt-70">#}
+{#            <!-- Single Cool Fact for Lunch -->#}
+{#            <div class="col-12 col-sm-6 col-lg-3">#}
+{#                <div class="single-cool-fact">#}
+{#                    <img src="{% static 'img/core-img/salad.png' %}" alt="">#}
+{#                    <h3><span class="counter">{{ counts.Lunch }}</span></h3>#}
+{#                    <h6>Lunch recipes</h6>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <!-- Single Cool Fact for Dinner -->#}
+{#            <div class="col-12 col-sm-6 col-lg-3">#}
+{#                <div class="single-cool-fact">#}
+{#                    <img src="{% static 'img/core-img/hamburger.png' %}" alt="">#}
+{#                    <h3><span class="counter">{{ counts.Dinner }}</span></h3>#}
+{#                    <h6>Dinner recipes</h6>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <!-- Single Cool Fact for BBQ -->#}
+{#            <div class="col-12 col-sm-6 col-lg-3">#}
+{#                <div class="single-cool-fact">#}
+{#                    <img src="{% static 'img/core-img/rib.png' %}" alt="">#}
+{#                    <h3><span class="counter">{{ counts.BBQ }}</span></h3>#}
+{#                    <h6>BBQ recipes</h6>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <!-- Single Cool Fact for Breakfast -->#}
+{#            <div class="col-12 col-sm-6 col-lg-3">#}
+{#                <div class="single-cool-fact">#}
+{#                    <img src="{% static 'img/core-img/pancake.png' %}" alt="">#}
+{#                    <h3><span class="counter">{{ recipes.counts.Breakfast }}</span></h3>#}
+{#                    <h6>Breakfast recipes</h6>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+        <!-- Recipe Cards -->
+        <div class="container">
+            <div class="row">
+                {% for recipe in recipes %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{ recipe.picture.url }}" class="card-img-top img-fluid" alt="{{ recipe.title }}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">{{ recipe.title }}</h5>
+                                <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-info">Details</a>
+                            </div>
+                            <!--
+                            <p class="card-text">Preparation Time: {{ recipe.preparation_time }}</p>
+                            <p class="card-text">Ingredients: {{ recipe.ingredients }}</p>
+                            <p class="card-text">Instructions: {{ recipe.instructions }}</p>
+                            -->
+                            <p class="card-text">Creator: {{ recipe.creator }}</p>
+                            <p class="card-text">Category: {{ recipe.category }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+
+
+
+
+    <div class="row mt-5 justify-content-center"> <!-- Add justify-content-center to center align -->
+    <div class="col-lg-5"> <!-- Reduce width of the comment section -->
+        <div class="contact-form-area">
+            <form action="{% url 'contact' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <input type="text" class="form-control" name="name" placeholder="Name">
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <input type="email" class="form-control" name="email" placeholder="E-mail">
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="subject" placeholder="Subject">
+                    </div>
+                    <div class="col-12">
+                        <textarea name="message" class="form-control" cols="30" rows="5" placeholder="Message"></textarea> <!-- Reduce rows to make it smaller -->
+                    </div>
+                    <div class="col-12">
+                        <button class="btn delicious-btn mt-3" type="submit">Post Comments</button> <!-- Adjust margin top -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5"> <!-- Reduce width of the comment section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Comments</h5>
+                <ul class="list-group list-group-flush">
+{#                    {% for comment in comments %}#}
+                    <li class="list-group-item">
+                        <strong>{{ comment.name }}</strong>: {{ comment.message }}
+                    </li>
+{#                    {% endfor %}#}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add space between comment section and Instagram module -->
+<div class="mt-5"></div> <!-- Add margin top to create space -->
+
+<!-- ##### Follow Us Instagram Area Start ##### -->
+    <div class="follow-us-instagram">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h5>Follow Us Instragram</h5>
+                </div>
+            </div>
+        </div>
+        <!-- Instagram Feeds -->
+        <div class="insta-feeds d-flex flex-wrap">
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="{% static 'img/bg-img/insta1.jpg' %}" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="{% static 'img/bg-img/insta2.jpg' %}" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="{% static 'img/bg-img/insta3.jpg' %}" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="{% static 'img/bg-img/insta4.jpg' %}" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="{% static 'img/bg-img/insta5.jpg' %}" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="{% static 'img/bg-img/insta6.jpg' %}" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="{% static 'img/bg-img/insta7.jpg' %}" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Follow Us Instagram Area End ##### -->
+{% endblock %}

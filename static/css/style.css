@@ -1378,3 +1378,16 @@ textarea:focus {
     padding-left: 30px; }
 
 /*# sourceMappingURL=style.css.map */
+.card-img-container {
+    height: 200px; /* Set the height of the container */
+    overflow: hidden; /* Hide any overflow */
+}
+
+.card-img-top {
+    object-fit: cover; /* Ensure the image covers the container */
+    height: 100%; /* Set the height of the image to 100% of the container */
+}
+
+.card {
+    height: 100%; /* Ensure all cards have the same height */
+}

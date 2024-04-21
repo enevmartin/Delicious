@@ -1,13 +1,24 @@
-<!-- recipes/recipe_form.html -->
 {% extends 'base.html' %}
 
 {% block content %}
     <div class="container">
-        <h2>{% if request.resolver_match.url_name == 'recipe_create' %}Create New Recipe{% else %}Update Recipe{% endif %}</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">{% if request.resolver_match.url_name == 'recipe_create' %}Create{% else %}Update{% endif %}</button>
-        </form>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Create New Recipe</div>
+
+                    <div class="card-body">
+                        <form action="{% url 'recipe_create' %}" method="post" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">Create Recipe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
+
+

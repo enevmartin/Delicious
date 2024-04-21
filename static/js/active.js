@@ -46,7 +46,7 @@
             dots: true,
             autoplay: true,
             autoplayTimeout: 5000,
-            smartSpeed: 1000
+            smartSpeed: 2000
         });
 
         welcomeSlide.on('translate.owl.carousel', function () {
@@ -90,11 +90,12 @@
             margin: 0,
             loop: true,
             nav: true,
-            navText: ['Prev', 'Next'],
+            navText: [''],
             dots: true,
             autoplay: true,
             autoplayTimeout: 5000,
-            smartSpeed: 1000
+            smartSpeed: 1000,
+            center: true
         });
     }
 

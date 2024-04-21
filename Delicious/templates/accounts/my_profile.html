@@ -3,17 +3,22 @@
 {% block content %}
 <div class="container">
     <h2 style="text-align: center;">My Profile</h2>
-    <div class="profile-info" style="text-align: center;">
-        <p><strong>First Name:</strong> {{ request.user.profile.first_name }}</p>
-        <p><strong>Last Name:</strong> {{ request.user.profile.last_name }}</p>
-        <p><strong>Date of Birth:</strong> {{ request.user.profile.date_of_birth }}</p>
-        <p><strong>Email:</strong> {{ request.user.email }}</p>
-        <p><strong>Profile Picture:</strong> <img src="{{ request.user.profile.profile_picture }}"  alt=" "></p>
-    </div>
-
-    <!-- Add a link to edit profile -->
-    <div style="text-align: center; margin-top: 30px;">
-        <a href="{% url 'edit_profile' pk=request.user.pk %}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">Edit Profile</a>
+    <div class="card mx-auto" style="max-width: 500px; position: relative;">
+        <div class="card-body">
+            <h5 class="card-title">Profile Information</h5>
+            <p class="card-text"><strong>First Name:</strong> {{ request.user.profile.first_name }}</p>
+            <p class="card-text"><strong>Last Name:</strong> {{ request.user.profile.last_name }}</p>
+            <p class="card-text"><strong>Date of Birth:</strong> {{ request.user.profile.date_of_birth }}</p>
+            <p class="card-text"><strong>Email:</strong> {{ request.user.email }}</p>
+            <div class="text-right" style="margin-top: 20px;">
+                <img src="{{ request.user.profile.profile_picture }}" class="rounded-circle" style="max-width: 150px; max-height: 150px; position: absolute; top: 20px; right: 20px;" alt="Profile Picture">
+            </div>
+            <!-- Add a link to edit profile -->
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="{% url 'edit_profile' pk=request.user.pk %}" class="btn btn-primary">Edit Profile</a>
+                <a href="{% url 'delete_profile' pk=request.user.pk %}" class="btn btn-danger ml-2">Delete Profile</a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
